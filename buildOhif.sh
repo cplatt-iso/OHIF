@@ -6,14 +6,14 @@ BASE_WORKDIR=$HOME/docker
 OHIFDIR=$BASE_WORKDIR/Viewers
 
 # set up directories 
-if [ -d $BASE_WORKDIR ] || mkdir $BASE_WORKDIR
-if [ -d $OHIFDIR ] || mkdir $OHIFDIR
+[ -d $BASE_WORKDIR ] || mkdir $BASE_WORKDIR
+[ -d $OHIFDIR ] || mkdir $OHIFDIR
 
 # clone the v3-stable repository
 git clone -b v3-stable https://github.com/OHIF/Viewers.git $OHIFDIR
 
 # put certs in place
-if [ -d $OHIFDIR/.docker/ssl ] || mkdir $OHIFDIR/.docker/ssl
+[ -d $OHIFDIR/.docker/ssl ] || mkdir $OHIFDIR/.docker/ssl
 
 # grab configuration files from uca git repository
 curl -LJO -o $OHIFDIR/.docker https://raw.githubusercontent.com/cplatt-iso/OHIF/main/Config/ohif-v3-default.js 
@@ -29,3 +29,7 @@ COPY --chown=nginx:nginx .docker/ssl/tiny.insiteone.com.key /etc/nginx/ssl \' $O
 sed -i '/ENTRYPOINT \[\"\/usr\/src\/entrypoint.sh\"\]/i \
 RUN rm /usr/share/nginx/html/app-config.js \
 COPY .docker/ohif-v3-default.js /usr/share/nginx/html/app-config.js \' $OHIFDIR/Dockerfile
+
+cd $OHIFDIR
+sudo docker build -t ohif/viewer:uca .
+
