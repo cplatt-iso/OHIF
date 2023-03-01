@@ -12,10 +12,7 @@ COPY --chown=nginx:nginx .docker/nginx-default.conf /etc/nginx/conf.d/default-ss
 COPY --chown=nginx:nginx .docker/ssl/tiny.insiteone.com.pem /etc/nginx/ssl \
 COPY --chown=nginx:nginx .docker/ssl/tiny.insiteone.com.key /etc/nginx/ssl \
 ' $HOME/docker/Viewers/Dockerfile
-sed -i '/ENTRYPOINT \[\"/usr/src/entrypoint.sh\"\]/i \
+sed -i '/ENTRYPOINT \[\"\/usr\/src\/entrypoint.sh\"\]/i \
 RUN rm /usr/share/nginx/html/app-config.js || true \
 COPY .docker/ohif-v3-default.js /usr/share/nginx/html/app-config.js \
 ' $HOME/docker/Viewers/Dockerfile
-
-
-
