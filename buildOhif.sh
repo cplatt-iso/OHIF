@@ -16,8 +16,8 @@ git clone -b v3-stable https://github.com/OHIF/Viewers.git $OHIFDIR
 [ -d $OHIFDIR/.docker/ssl ] || mkdir $OHIFDIR/.docker/ssl
 
 # grab configuration files from uca git repository
-curl -LJO -o $OHIFDIR/.docker/ohif-v3-default.js https://raw.githubusercontent.com/cplatt-iso/OHIF/main/Config/ohif-v3-default.js 
-curl -LJO -o $OHIFDIR/.docker/nginx-default.conf https://raw.githubusercontent.com/cplatt-iso/OHIF/main/Config/nginx-default.conf
+curl $OHIFDIR/.docker/ohif-v3-default.js https://raw.githubusercontent.com/cplatt-iso/OHIF/main/Config/ohif-v3-default.js > $OHIFDIR/.docker/ohif-v3-default.js
+curl $OHIFDIR/.docker/nginx-default.conf https://raw.githubusercontent.com/cplatt-iso/OHIF/main/Config/nginx-default.conf > $OHIFDIR/.docker/nginx-default.conf
 cp $SSL_CERT $OHIFDIR/.docker/ssl
 cp $SSL_KEY $OHIFDIR/.docker/ssl
 
