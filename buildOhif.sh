@@ -28,6 +28,7 @@ COPY --chown=nginx:nginx .docker/ssl/tiny.insiteone.com.pem /etc/nginx/ssl \
 COPY --chown=nginx:nginx .docker/ssl/tiny.insiteone.com.key /etc/nginx/ssl' $OHIFDIR/Dockerfile
 
 sed -i '/ENTRYPOINT \[\"\/usr\/src\/entrypoint.sh\"\]/i \
+USER root \
 RUN rm /usr/share/nginx/html/app-config.js || true \
 COPY .docker/ohif-v3-default.js /usr/share/nginx/html/app-config.js' $OHIFDIR/Dockerfile
 
