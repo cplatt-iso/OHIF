@@ -23,12 +23,14 @@ cp $SSL_KEY $OHIFDIR/.docker/ssl
 
 # Modify Dockerfile 
 sed -i '/USER nginx/a \
-COPY --chown=nginx:nginx .docker/nginx-default.conf /etc/nginx/conf.d/default-ssl.conf \
-COPY --chown=nginx:nginx .docker/ssl/tiny.insiteone.com.pem /etc/nginx/ssl \
-COPY --chown=nginx:nginx .docker/ssl/tiny.insiteone.com.key /etc/nginx/ssl \' $OHIFDIR/Dockerfile
+COPY --chown=nginx:nginx .docker/nginx-default.conf /etc/nginx/conf.d/default-ssl.conf 
+COPY --chown=nginx:nginx .docker/ssl/tiny.insiteone.com.pem /etc/nginx/ssl 
+COPY --chown=nginx:nginx .docker/ssl/tiny.insiteone.com.key /etc/nginx/ssl
+' $OHIFDIR/Dockerfile
 sed -i '/ENTRYPOINT \[\"\/usr\/src\/entrypoint.sh\"\]/i \
-RUN rm /usr/share/nginx/html/app-config.js \
-COPY .docker/ohif-v3-default.js /usr/share/nginx/html/app-config.js \' $OHIFDIR/Dockerfile
+RUN rm /usr/share/nginx/html/app-config.js 
+COPY .docker/ohif-v3-default.js /usr/share/nginx/html/app-config.js
+' $OHIFDIR/Dockerfile
 
 cd $OHIFDIR
 sudo docker build -t ohif/viewer:uca .
