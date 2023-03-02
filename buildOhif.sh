@@ -33,7 +33,7 @@ echo "Modifying Dockerfile to incorporate our configuration"
 # Modify Dockerfile 
 sed -i '/USER nginx/a \
 COPY --chown=nginx:nginx .docker/nginx-default.conf /etc/nginx/conf.d/default-ssl.conf \
-RUN mkdir /etc/nginx/ssl \ 
+RUN mkdir /etc/nginx/ssl \
 COPY --chown=nginx:nginx .docker/ssl/tiny.insiteone.com.pem /etc/nginx/ssl/tiny.insiteone.com.pem \
 COPY --chown=nginx:nginx .docker/ssl/tiny.insiteone.com.key /etc/nginx/ssl/tiny.insiteone.com.key' $OHIFDIR/Dockerfile
 
